@@ -19,6 +19,16 @@
 <dependencies>
     <dependency>
         <groupId>com.xxx</groupId>
+        <artifactId>xxx-infrastructure</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.xxx</groupId>
+        <artifactId>xxx-domain</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.xxx</groupId>
         <artifactId>xxx-application</artifactId>
         <version>${project.version}</version>
     </dependency>
