@@ -22,7 +22,7 @@ spring:
     database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: none  # Không tự động tạo/ cập nhật bảng thay vì update
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
@@ -38,7 +38,7 @@ spring:
       password: ""  # Password for connecting to the Redis server (default is empty)
       lettuce:
         pool: # Connection pool settings
-          max-active: 8 # Maximum number of active connections in the pool (uses -1 for no limit)
+          max-active: 10000 # Maximum number of active connections in the pool (uses -1 for no limit)
           max-idle: 8 # Maximum number of idle connections in the pool
           min-idle: 0 # Minimum number of idle connections in the pool
           max-wait: -1ms # Maximum wait time to get a connection from the pool (uses -1 for no limit)
