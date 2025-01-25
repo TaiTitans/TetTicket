@@ -23,6 +23,6 @@ public class TicketDetailAppServiceImpl implements TicketDetailAppService {
     public TicketDetail getTicketDetailById(Long ticketId) {
         log.info("Implement Application : {}", ticketId);
 
-        return ticketDetailCacheService.getTicketDefaultCacheVip(ticketId, System.currentTimeMillis());
+        return ticketDetailCacheService.getTicketDefaultCacheLocal(ticketId, System.currentTimeMillis());
     }
 }

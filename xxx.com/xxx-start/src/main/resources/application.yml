@@ -7,13 +7,13 @@ server:
 spring:
   # application
   application:
-    name: zzz.com
+    name: xxx.com
   #DBS
   datasource:
     hikari:
       maximum-pool-size: 20  # Số lượng tối đa kết nối
       minimum-idle: 5        # Số lượng kết nối tối thiểu trong pool
-    url: jdbc:mysql://localhost:3316/vetautet
+    url: jdbc:mysql://localhost:3316/ticket
     username: root
     password: root1234
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -43,6 +43,9 @@ spring:
           min-idle: 0 # Minimum number of idle connections in the pool
           max-wait: -1ms # Maximum wait time to get a connection from the pool (uses -1 for no limit)
       connect-timeout: 30000 # Connection timeout (in milliseconds)
+    threads:
+      virtual:
+        enabled: true
 resilience4j:
   circuitbreaker:
     instances:
