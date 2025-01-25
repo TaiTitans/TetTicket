@@ -36,7 +36,7 @@ TetTicket is an online ticket management platform designed for Tet events. This 
 ## ⚙️ Installation and Setup
 
 ### System Requirements
-- [Java 21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+- [Java 23](https://www.oracle.com/java/technologies/downloads/#java23)
 - [Docker](https://www.docker.com/)
 
 ### Setup Instructions
