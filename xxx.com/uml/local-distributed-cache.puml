@@ -1,0 +1,30 @@
+@startuml
+actor UserD as "User D"
+entity "Local Cache (Guava)" as LocalCache
+entity "Distributed Cache (Redis)" as Redis
+entity "MySQL Database" as MySQL
+entity "Distributed Lock (Redis)" as RedisLock
+
+UserD -> LocalCache : Query item
+LocalCache -> LocalCache : Check local cache
+alt Item found in local cache
+    LocalCache -> UserD : Return item from local cache
+else Item not found
+    LocalCache -> Redis : Query Redis cache
+    alt Item found in Redis
+        Redis -> UserD : Return item from Redis
+    else Item not found
+        Redis -> RedisLock : Acquire lock
+        alt Lock acquired
+            RedisLock -> MySQL : Query MySQL for item
+            MySQL -> Redis : Return item from MySQL
+            MySQL -> Redis : Store item in Redis
+            MySQL -> LocalCache : Store item in local cache
+            RedisLock -> Redis : Release lock
+            RedisLock -> UserD : Return item to User D
+        else Lock not acquired
+            RedisLock -> UserD : Wait for lock to be released
+        end
+    end
+end
+@enduml

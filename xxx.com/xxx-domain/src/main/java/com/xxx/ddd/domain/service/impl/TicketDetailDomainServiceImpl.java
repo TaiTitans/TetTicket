@@ -5,7 +5,6 @@ import com.xxx.ddd.domain.repository.TicketDetailRepository;
 import com.xxx.ddd.domain.service.TicketDetailDomainService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

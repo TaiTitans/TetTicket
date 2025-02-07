@@ -1,0 +1,41 @@
+@startuml
+actor UserX
+actor UserY
+
+entity "Server A (Guava Cache)" as A
+entity "Server B (Guava Cache)" as B
+entity "Distributed Cache" as DC
+
+UserX -> A : Lần truy vấn đầu tiên (request01)
+A -> A : get ticket in local cache
+A -> DC : If (itemId=1) is null -> get ticket redis
+DC -> A : If itemId=1 is exists and stock=10
+A -> UserX : Trả về dữ liệu (itemId=1, tồn kho=10)
+
+UserX -> A : Lần truy vấn thứ hai (request02)
+A -> A : Kiểm tra local cache
+A -> UserX : Trả về dữ liệu từ local cache (itemId=1, tồn kho=10)
+
+UserY -> B : Lần truy vấn đầu tiên
+B -> DC : Truy vấn dữ liệu (itemId=1)
+DC -> B : Trả về itemId=1, tồn kho=8
+B -> UserY : Trả về dữ liệu (itemId=1, tồn kho=8)
+UserY -> UserY : Lưu dữ liệu vào local storage (tồn kho=8)
+
+UserY -> B : Lần truy vấn thứ hai
+B -> B : Kiểm tra local cache
+B -> UserY : Trả về dữ liệu từ local cache (itemId=1, tồn kho=8)
+
+UserY -> A : User Y -> truy vấn lần thứ ba
+A -> A : Kiểm tra local cache
+A -> DC : Truy vấn dữ liệu mới nhất (itemId=1)
+DC -> A : Trả về itemId=1, tồn kho=10 (Vì A chưa được thông báo cập nhật)
+A -> UserY : Trả về dữ liệu (itemId=1, tồn kho=10)
+UserY -> UserY : UserY Lưu dữ liệu vào local storage (tồn kho=10) và tiến hành mua với SL9 (Không nhất quán với item = 1)
+
+UserX -> A : Lần truy vấn thứ ba
+A -> A : Kiểm tra local cache
+A -> UserX : Trả về dữ liệu từ local cache (itemId=1, tồn kho=10)
+UserX -> UserX : Lưu dữ liệu vào local storage (tồn kho=10)
+
+@enduml

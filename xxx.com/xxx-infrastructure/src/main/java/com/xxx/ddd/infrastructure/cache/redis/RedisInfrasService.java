@@ -10,4 +10,6 @@ public interface RedisInfrasService {
     <T> T getObject(String key, Class<T> targetClass);
     //set object ttl
     void setObjectWithTTL(String key, Object value, long timeout, TimeUnit unit);
+    // delete redis by key
+    void delete(String key);
 }

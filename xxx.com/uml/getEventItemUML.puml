@@ -1,0 +1,25 @@
+@startuml
+
+actor anonystick
+participant EventItemController
+participant EventItemAPPService
+participant EventItemCacheService
+
+anonystick -> EventItemController : Request Event item by ID
+EventItemController -> EventItemAPPService : Call application module
+EventItemAPPService -> EventItemCacheService : Call Event Item in cache service
+
+alt [Cache YES]
+    EventItemCacheService --> EventItemAPPService : Return cache result
+    EventItemAPPService -> EventItemAPPService : Convert EventItem to EventItemDTO
+    EventItemAPPService --> EventItemController : Return application module result
+    EventItemController -> EventItemController : Convert EventItemDTO to EventItemResponse
+    EventItemController --> anonystick : Return result
+else [Cache NO]
+    EventItemAPPService -> EventItemAPPService : Asynchronous cache update
+    EventItemCacheService --> EventItemAPPService : Return delay handling result
+    EventItemAPPService --> EventItemController : Return application layer result
+    EventItemController --> anonystick : Return result
+end
+
+@enduml

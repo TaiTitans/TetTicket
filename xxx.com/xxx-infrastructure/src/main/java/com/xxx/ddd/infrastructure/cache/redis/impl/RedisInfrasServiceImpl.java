@@ -97,4 +97,8 @@ public class RedisInfrasServiceImpl implements RedisInfrasService {
             log.error("setObjectWithTTL error: {}", e.getMessage());
         }
     }
+    @Override
+    public void delete(String key) {
+        redisTemplate.delete(key);
+    }
 }

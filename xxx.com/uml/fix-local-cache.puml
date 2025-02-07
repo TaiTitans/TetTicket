@@ -1,0 +1,41 @@
+@startuml
+actor UserX
+actor UserY
+
+entity "Server A (Guava Cache)" as A
+entity "Server B (Guava Cache)" as B
+entity "Distributed Cache" as DC
+
+UserX -> A : Lần truy vấn đầu tiên (version = null)
+A -> DC : Truy vấn dữ liệu (itemId=1, version=null)
+DC -> A : Trả về itemId=1, version=12:00, tồn kho=10
+A -> UserX : Trả về dữ liệu (itemId=1, version=12:00, tồn kho=10)
+UserX -> UserX : Lưu version = 12:00 trong cookie/local storage
+
+UserX -> A : Lần truy vấn thứ hai (version=12:00)
+A -> A : Kiểm tra local cache
+A -> UserX : Trả về dữ liệu từ local cache (itemId=1, version=12:00, tồn kho=10)
+
+UserY -> B : Lần truy vấn đầu tiên (version = null)
+B -> DC : Truy vấn dữ liệu (itemId=1, version=null)
+DC -> B : Trả về itemId=1, version=12:05, tồn kho=8
+B -> UserY : Trả về dữ liệu (itemId=1, version=12:05, tồn kho=8)
+UserY -> UserY : Lưu version = 12:05 trong cookie/local storage
+
+UserY -> B : Lần truy vấn thứ hai (version=12:05)
+B -> B : Kiểm tra local cache
+B -> UserY : Trả về dữ liệu từ local cache (itemId=1, version=12:05, tồn kho=8)
+
+UserY -> A : Lần truy vấn thứ ba (version=12:05)
+A -> A : Kiểm tra local cache (version=12:00)
+A -> DC : Truy vấn dữ liệu mới nhất (itemId=1, version=12:05)
+DC -> A : Trả về itemId=1, version=12:10, tồn kho=8
+A -> UserY : Trả về dữ liệu (itemId=1, version=12:10, tồn kho=8)
+UserY -> UserY : Lưu version = 12:10 trong cookie/local storage
+
+UserX -> A : Lần truy vấn thứ ba (version=12:00)
+A -> A : Kiểm tra local cache (version=12:10)
+A -> UserX : Trả về dữ liệu từ local cache (itemId=1, version=12:10, tồn kho=8)
+UserX -> UserX : Lưu version = 12:10 trong cookie/local storage
+
+@enduml

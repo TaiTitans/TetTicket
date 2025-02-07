@@ -13,5 +13,15 @@
     <file url="file://$PROJECT_DIR$/xxx-infrastructure/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xxx-start/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xxx-start/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-controller/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-controller/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-infrastructure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-infrastructure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxxx-start/src/main/resources" charset="UTF-8" />
   </component>
 </project>
