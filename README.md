@@ -1,23 +1,35 @@
 # TetTicket
 
-TetTicket is an online ticket management platform designed for Tet events. This project aims to high traffic system.
+`TetTicket is an online ticket management platform designed for Tet events. This project aims to high traffic system.`
+
+❗Note: this is a personal project on my career journey to become a Senior Backend Developer. So this project probably won't be the most optimal because I'm working on it and studying at the same time.
 
 ## 🚀 Key Features
+### Distributed systems are subject to high loads >100,000 req/s
 
-- Event Management:
-  - Add, edit, and delete events.
-  - View detailed event information.
-- Ticket Management:
-  - Create and manage ticket types (e.g., regular, VIP, combo).
-  - Monitor ticket availability.
-- User Support:
-  - Register and log in (with OAuth integration).
-  - Purchase tickets and make online payments.
-  - Send transaction confirmation and e-tickets via email.
-- Reports and Analytics:
-  - View event revenue statistics.
-  - Generate reports on tickets sold.
+-> Defense Line 1: RateLimiter - Circuit Breaker (Resilience4j)
 
+-> Defense Line 2: Distributed Cache -> Redisson.
+
+-> Defense Line 3: Local Cache (Guava)
+
+---
+**Deploy**: Docker Compose
+
+**Logging**: Prometheus + Grafana (Spring Boot, MySQL, Redis, Node Exporter)
+
+**Stack**: ELK - Elasticsearch - LogStash - Kibana
+
+**Testing Performance**: Vegeta, WRK.
+
+Setup Proxy **Nginx for Load Balancer**
+
+*Expected to be implement.*:
+
+**Message Queue**: Kafka Cluster.
+
+**Keycloak** for **Authentication and Authorization**.
+...
 ## 🛠️ Technology Stack
 
 ### Backend:
@@ -25,8 +37,8 @@ TetTicket is an online ticket management platform designed for Tet events. This 
 - **Framework**: Spring Boot (Domain Driven Design)
 - **Database**:
   - MySQL: Used for storing user, event, and ticket data.
-  - Redis: Used for temporary storage of shopping cart data and caching.
-- **Security**: JWT Authentication.
+  - Redis: Used for temporary storage of caching.
+- **Security**: Keycloak for Authentication and Authorization.
 
 ### Deployment:
 - **Docker**: Containerized services.
@@ -66,7 +78,8 @@ TetTicket/
 |   ├── xxx-controller/ 
 │   └── xxx-start
 |    ├── environtment/               # Data project
-|        ├── environtment/docker-conpose-dev.yml      # Docker Compose configuration
+|        ├── environtment/docker-conpose-dev.yml    # Docker Compose configuration 
+|        ├── environtment/docker-conpose-broker-kafka.yml  
 └── README.md               # Project documentation
 ```
 
