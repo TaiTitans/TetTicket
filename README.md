@@ -4,6 +4,7 @@
 
 ❗Note: this is a personal project on my career journey to become a Senior Backend Developer. So this project probably won't be the most optimal because I'm working on it and studying at the same time.
 
+![GitHub license](https://img.shields.io/github/license/TaiTitans/TetTicket) ![GitHub stars](https://img.shields.io/github/stars/TaiTitans/TetTicket) ![GitHub forks](https://img.shields.io/github/forks/TaiTitans/TetTicket)
 ## 🚀 Key Features
 ### Distributed systems are subject to high loads >100,000 req/s
 
