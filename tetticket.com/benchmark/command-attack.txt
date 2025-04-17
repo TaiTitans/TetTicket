@@ -1,0 +1,2 @@
+1. vegeta attack -rate=1000 -duration=20s -targets="D:\Github_Rep\My Project\ddd_architecture_base\xxx.com\benchmark\targets.txt" -output results.bin
+2. vegeta report results.bin

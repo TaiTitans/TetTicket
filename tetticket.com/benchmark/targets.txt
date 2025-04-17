@@ -1,0 +1,1 @@
+GET http://localhost:1122/ticket/1/detail/1
