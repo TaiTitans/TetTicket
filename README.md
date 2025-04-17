@@ -7,6 +7,7 @@
 ![GitHub license](https://img.shields.io/github/license/TaiTitans/TetTicket) ![GitHub stars](https://img.shields.io/github/stars/TaiTitans/TetTicket) ![GitHub forks](https://img.shields.io/github/forks/TaiTitans/TetTicket)
 ## 🚀 Key Features
 ### Distributed systems are subject to high loads >20,000 req/s
+![{126430C9-ACE5-414A-90F1-42EC96697A47}](https://github.com/user-attachments/assets/cc13bf64-4c54-4a82-b5b1-47e1db33c496)
 
 -> Defense Line 1: RateLimiter - Circuit Breaker (Resilience4j)
 
