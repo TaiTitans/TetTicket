@@ -58,7 +58,7 @@ Setup Proxy **Nginx for Load Balancer**
 1. Clone the repository:
    ```bash
    git clone https://github.com/TaiTitans/TetTicket.git
-   cd TetTicket/xxx.com/environtment
+   cd TetTicket/tetticket.com/environtment
    ```
 
 2. Start the backend services with Docker Compose:
@@ -73,12 +73,12 @@ Setup Proxy **Nginx for Load Balancer**
 
 ```plaintext
 TetTicket/
-├── xxx.com/                # Backend with DDD
-│   ├── xxx-application/       
-│   ├── xxx-domain/     
-│   ├── xxx-infrastructure/     
-|   ├── xxx-controller/ 
-│   └── xxx-start
+├── tetticket.com/                # Backend with DDD
+│   ├── tetticket-application/       
+│   ├── tetticket-domain/     
+│   ├── tetticket-infrastructure/     
+|   ├── tetticket-controller/ 
+│   └── tetticket-start
 |    ├── environtment/               # Data project
 |        ├── environtment/docker-conpose-dev.yml    # Docker Compose configuration 
 |        ├── environtment/docker-conpose-broker-kafka.yml  
