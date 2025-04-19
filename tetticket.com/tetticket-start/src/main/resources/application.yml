@@ -7,7 +7,7 @@ server:
 spring:
   # application
   application:
-    name: xxx.com
+    name: tetticket.com
   #DBS
   datasource:
     hikari:
@@ -85,3 +85,8 @@ management:
       show-details: always
     prometheus:
       enabled: true
+
+jwt:
+  access-token-expiration-in-ms: 3600000 # 1 hour
+  refresh-token-expiration-in-ms: 604800000 # 7 days
+  secret: ${JWT_SECRET}
