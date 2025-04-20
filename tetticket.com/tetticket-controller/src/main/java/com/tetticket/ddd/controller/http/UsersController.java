@@ -22,18 +22,4 @@ public class UsersController {
     @Autowired
     private UsersService usersAppService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<UsersDTO>> getUserById(@PathVariable("id") Long id) {
-        try {
-            if (id == null) {
-                return ResponseEntity.badRequest().build();
-            }
-            log.info("Get User By ID: {}", id);
-            UsersDTO usersDTO = usersAppService.getUserById(id);
-            return ResponseEntity.ok(Optional.ofNullable(usersDTO));
-        }catch (Exception e){
-            log.error("Error while getting user by id: {}", e.getMessage());
-            return ResponseEntity.status(500).body(null);
-        }
-    }
 }

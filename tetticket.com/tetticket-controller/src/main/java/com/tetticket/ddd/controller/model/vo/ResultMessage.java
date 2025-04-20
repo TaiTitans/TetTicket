@@ -8,33 +8,57 @@ import java.io.Serializable;
 /**
  * VO tương tác giữa frontend và backend
  */
-@Data
 public class ResultMessage<T> implements Serializable {
+         private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
+         private boolean success;
+         private String message;
+         private Integer code;
+         private long timestamp = System.currentTimeMillis();
+         private T result;
 
-    /**
-     * Cờ thành công
-     */
-    private boolean success;
+         public boolean isSuccess() {
+             return success;
+         }
 
-    /**
-     * Thông báo
-     */
-    private String message;
+         public String getMessage() {
+             return message;
+         }
 
-    /**
-     * Mã trả về
-     */
-    private Integer code;
+         public Integer getCode() {
+             return code;
+         }
 
-    /**
-     * Dấu thời gian
-     */
-    private long timestamp = System.currentTimeMillis();
+         public long getTimestamp() {
+             return timestamp;
+         }
 
-    /**
-     * Đối tượng kết quả
-     */
-    private T result;
-}
+         public T getResult() {
+             return result;
+         }
+
+         public ResultMessage<T> setSuccess(boolean success) {
+             this.success = success;
+             return this;
+         }
+
+         public ResultMessage<T> setMessage(String message) {
+             this.message = message;
+             return this;
+         }
+
+         public ResultMessage<T> setCode(Integer code) {
+             this.code = code;
+             return this;
+         }
+
+         public ResultMessage<T> setTimestamp(long timestamp) {
+             this.timestamp = timestamp;
+             return this;
+         }
+
+         public ResultMessage<T> setResult(T result) {
+             this.result = result;
+             return this;
+         }
+     }

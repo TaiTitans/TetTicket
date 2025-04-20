@@ -30,6 +30,15 @@ spring:
   jackson:
     serialization:
       indent-output: true
+  mail:
+    host: in-v3.mailjet.com
+    port: ${MAIL_PORT}
+    username: ${MAIL_API}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          from: mekongocop@gmail.com
   # Redis server connection settings
   data:
     redis:
@@ -90,3 +99,8 @@ jwt:
   access-token-expiration-in-ms: 3600000 # 1 hour
   refresh-token-expiration-in-ms: 604800000 # 7 days
   secret: ${JWT_SECRET}
+
+mailjet:
+  api:
+    key: ${MAIL_API}
+    secret: ${MAIL_PASSWORD}

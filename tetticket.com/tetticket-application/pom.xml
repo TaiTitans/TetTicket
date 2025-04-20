@@ -23,9 +23,24 @@
         <version>${project.version}</version>
     </dependency>
     <dependency>
+        <groupId>com.mailjet</groupId>
+        <artifactId>mailjet-client</artifactId>
+        <version>5.2.5</version>
+    </dependency>
+    <dependency>
         <groupId>com.tetticket</groupId>
         <artifactId>tetticket-infrastructure</artifactId>
         <version>${project.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <scope>test</scope>
     </dependency>
 </dependencies>
 </project>

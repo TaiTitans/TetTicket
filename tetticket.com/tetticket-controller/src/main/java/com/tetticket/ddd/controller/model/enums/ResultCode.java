@@ -26,6 +26,7 @@ public enum ResultCode {
      */
     ERROR(400, "Máy chủ bận, vui lòng thử lại sau"),
 
+    BAD_REQUEST(400, "Yêu cầu không hợp lệ"),
     /**
      * Người dùng
      */
