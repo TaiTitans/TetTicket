@@ -16,6 +16,11 @@
 -> Defense Line 3: Local Cache (Guava)
 
 ---
+- **Swagger API**: http://localhost:1122/swagger-ui.html
+![{8FDCDA42-67CD-4CFE-9306-1EAD2A0FB105}](https://github.com/user-attachments/assets/8c4f789c-a8d9-4438-87c7-61d9b2368fcd)
+
+---
+
 **Deploy**: Docker Compose
 
 **Logging**: Prometheus + Grafana (Spring Boot, MySQL, Redis, Node Exporter)
@@ -29,8 +34,6 @@ Setup Proxy **Nginx for Load Balancer**
 *Expected to be implement.*:
 
 **Message Queue**: Kafka Cluster.
-
-**Keycloak** for **Authentication and Authorization**.
 ...
 ## 🛠️ Technology Stack
 
@@ -41,7 +44,7 @@ Setup Proxy **Nginx for Load Balancer**
   - MySQL: Used for storing user, event, and ticket data.
   - Redis: Used for temporary storage of caching.
 - **Security**: Keycloak for Authentication and Authorization.
-
+- **API Documentation**: Spring OpenAPI + Swagger v2.3.0
 ### Deployment:
 - **Docker**: Containerized services.
 - **Prometheus**: Tracing.
