@@ -99,8 +99,20 @@ jwt:
   access-token-expiration-in-ms: 3600000 # 1 hour
   refresh-token-expiration-in-ms: 604800000 # 7 days
   secret: ${JWT_SECRET}
+  issuer: TaiTitans
 
 mailjet:
   api:
     key: ${MAIL_API}
     secret: ${MAIL_PASSWORD}
+
+
+#Swagger
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    doc-expansion: none

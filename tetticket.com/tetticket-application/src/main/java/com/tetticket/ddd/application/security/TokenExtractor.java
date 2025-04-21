@@ -1,4 +1,4 @@
-package com.tetticket.ddd.infrastructure.security;
+package com.tetticket.ddd.application.security;
 
 public class TokenExtractor {
     public static String extractToken(String authorizationHeader){
