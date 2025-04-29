@@ -3,15 +3,17 @@ package com.tetticket.ddd.application.service.users;
 import com.tetticket.ddd.application.mapper.UsersMapper;
 import com.tetticket.ddd.application.model.UsersDTO;
 import com.tetticket.ddd.application.service.security.OTPService;
+import com.tetticket.ddd.application.service.util.BloomFilterService;
 import com.tetticket.ddd.domain.model.entity.Roles;
 import com.tetticket.ddd.domain.model.entity.Users;
 import com.tetticket.ddd.infrastructure.repository.RolesRepository;
 import com.tetticket.ddd.infrastructure.repository.UsersRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 
 @Service
 @Slf4j
@@ -22,6 +24,14 @@ public class UsersService {
     private final OTPService otpService;
     private final RolesRepository rolesRepository;
     private final PasswordEncoder passwordEncoder;
+    private final BloomFilterService bloomFilterService;
+
+    @PostConstruct
+    public void initBloomFilter(){
+        List<Users> allUsers = usersRepository.findAll();
+        allUsers.forEach(user-> bloomFilterService.addUsernameToFilter(user.getUsername()));
+        log.info("Bloom filter initialized with {} users", allUsers.size());
+    }
 
     /**
      * Handles the registration process for a new user. Validates the provided
@@ -49,9 +59,11 @@ public class UsersService {
     }
 
     private void validateRegistration(UsersDTO usersDTO, String otp) {
-        if (usersRepository.findByUsername(usersDTO.getUsername()) != null) {
-            log.warn("Attempted registration with existing username: {}", usersDTO.getUsername());
-            throw new IllegalArgumentException("Username already exists");
+        if (bloomFilterService.mightExist(usersDTO.getUsername())) {
+          if(usersRepository.findByUsername(usersDTO.getUsername()) != null) {
+                log.warn("Attempted registration with existing username: {}", usersDTO.getUsername());
+                    throw new IllegalArgumentException("Username already exists");
+          }
         }
         if (usersRepository.findByEmail(usersDTO.getEmail()) != null) {
             log.warn("Attempted registration with existing email: {}", usersDTO.getEmail());
@@ -71,6 +83,7 @@ public class UsersService {
         user.getRoles().add(defaultRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
+        bloomFilterService.addUsernameToFilter(user.getUsername());
     }
 
 

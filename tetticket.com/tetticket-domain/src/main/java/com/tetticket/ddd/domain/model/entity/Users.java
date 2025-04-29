@@ -1,6 +1,9 @@
 package com.tetticket.ddd.domain.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,18 +15,24 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 public class Users implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
-    private String username;
-    private String password;
-    private String email;
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ private Long user_id;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
-    private Set<Roles> roles = new HashSet<>();
+ @NotBlank(message = "Username is mandatory")
+ private String username;
 
+ @NotBlank(message = "Password is mandatory")
+ @Size(min = 8, message = "Password must be at least 8 characters long")
+ private String password;
 
+ @NotBlank(message = "Email is mandatory")
+ @Email(message = "Email should be valid")
+ private String email;
+
+ @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+ @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
+ private Set<Roles> roles = new HashSet<>();
 
     // Config for UserDetails
 

@@ -55,6 +55,10 @@ spring:
     threads:
       virtual:
         enabled: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 20MB
 resilience4j:
   circuitbreaker:
     instances:
@@ -116,3 +120,14 @@ springdoc:
     operations-sorter: method
     tags-sorter: alpha
     doc-expansion: none
+
+aws:
+  access:
+    key:
+      id: ${AWS_ACCESS_KEY_ID}
+  secret:
+    access:
+        key: ${AWS_SECRET_ACCESS_KEY}
+  s3:
+    region: ap-southeast-1
+    bucket: tetticket
