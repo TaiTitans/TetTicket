@@ -42,6 +42,7 @@ Setup Proxy **Nginx for Load Balancer**
 - **Framework**: Spring Boot (Domain Driven Design)
 - **Database**:
   - MySQL: Used for storing user, event, and ticket data.
+  - AWS: S3.
   - Redis: Used for temporary storage of caching.
 - **Security**: Keycloak for Authentication and Authorization.
 - **API Documentation**: Spring OpenAPI + Swagger v2.3.0
