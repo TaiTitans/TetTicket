@@ -36,7 +36,7 @@ services:
       - KAFKA_CFG_ADVERTISED_LISTENERS=EXTERNAL://192.168.1.115:9193,PLAINTEXT://kafka1:9092
       # Interbroker listener name
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-      # Cluster ID for Kafka, must be the same across the cluster. Use a generated UUID
+      # Cluster ID for Kafka must be the same across the cluster. Use a generated UUID
       - KAFKA_KRAFT_CLUSTER_ID=LelM2dIFQkiUFvXCEcqRWA
       # Cluster address
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka1:9093
@@ -51,7 +51,7 @@ services:
       ### Broker configurations
       # Define external access address (host IP and port) -> get Ip: run docker inspect kafka1
       # - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://${KAFKA1_IP}:9092
-      # Broker ID, must be unique
+      # Broker ID must be unique
       - KAFKA_BROKER_ID=1
       - KAFKA_CFG_NODE_ID=1
     volumes:

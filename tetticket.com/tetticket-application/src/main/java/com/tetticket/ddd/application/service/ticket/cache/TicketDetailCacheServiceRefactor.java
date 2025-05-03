@@ -74,7 +74,7 @@ public class TicketDetailCacheServiceRefactor {
     }
 
     /**
-     * get ticket from database
+     * get ticket from a database
      */
     public TicketDetailCache getTicketDetailDatabase(Long ticketId) {
         RedisDistributedLocker locker = redisDistributedService.getDistributedLock(genEventItemKeyLock(ticketId));
@@ -115,7 +115,7 @@ public class TicketDetailCacheServiceRefactor {
         }
         // 2 - put data to local cache
         // lock()
-        ticketDetailLocalCache.put(ticketId, ticketDetailCache); //.. consistency cache
+        ticketDetailLocalCache.put(ticketId, ticketDetailCache); //. consistency cache
         // unLock()
         log.info("GET TICKET FROM DISTRIBUTED CACHE");
         return ticketDetailCache;
@@ -126,7 +126,7 @@ public class TicketDetailCacheServiceRefactor {
      */
     public TicketDetailCache getTicketDetailLocalCache(Long ticketId) {
         // get cache from GUAVA
-        // get cache from Caffein
+        // get cache from Caffeine
         return ticketDetailLocalCache.getIfPresent(ticketId);
     }
 
