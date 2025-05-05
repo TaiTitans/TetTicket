@@ -23,11 +23,35 @@ services:
     networks:
       - pre-event-network
 
-  redis:
-    container_name: pre-event-redis
-    image: redislabs/redismod:latest
+  redis-master:
+    image: redis:7
+    container_name: redis-master
     ports:
-      - "6319:6379"
+      - "6379:6379"
+    networks:
+      - pre-event-network
+
+  redis-slave:
+    image: redis:7
+    container_name: redis-slave
+    depends_on:
+      - redis-master
+    command: ["redis-server", "--replicaof", "redis-master", "6379"]
+    ports:
+      - "6380:6379"
+    networks:
+      - pre-event-network
+
+  redis-sentinel:
+    image: redis:7
+    container_name: redis-sentinel
+    depends_on:
+      - redis-master
+    command: ["redis-sentinel", "/etc/sentinel/sentinel.conf"]
+    volumes:
+      - ./sentinel.conf:/etc/sentinel/sentinel.conf
+    ports:
+      - "26379:26379"
     networks:
       - pre-event-network
 
