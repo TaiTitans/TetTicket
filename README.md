@@ -43,7 +43,7 @@ Setup Proxy **Nginx for Load Balancer**
 - **Database**:
   - MySQL: Used for storing user, event, and ticket data.
   - AWS: S3.
-  - Redis: Used for temporary storage of caching.
+  - Redis: Redisson (Sentinel, LUA)
 - **Security**: Keycloak for Authentication and Authorization.
 - **API Documentation**: Spring OpenAPI + Swagger v2.3.0
 ### Deployment:
