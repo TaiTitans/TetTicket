@@ -1,6 +1,6 @@
 package com.tetticket.ddd.domain.model.enums;
 
-public enum Method {
+public enum PaymentMethod {
     BANKING,
     MOMO,
     VNPAY

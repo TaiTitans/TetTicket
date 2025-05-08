@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,5 +24,9 @@ public class TicketDetailInfrasRepositoryImpl implements TicketDetailRepository 
         return ticketDetailJPAMapper.findById(id);
     }
 
-
+    @Override
+    public List<TicketDetail> findAll() {
+        log.info("Fetching all ticket details");
+        return ticketDetailJPAMapper.findAll();
+    }
 }

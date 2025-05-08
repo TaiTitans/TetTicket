@@ -115,4 +115,11 @@ public class CartService {
             throw new RuntimeException("Failed to update cart", e);
         }
     }
+
+    public void clearCart(Long userId) {
+        RMap<String, String> cart = redissonClient.getMap(CART_KEY_PREFIX + userId);
+        cart.delete();
+    }
+
+
 }
