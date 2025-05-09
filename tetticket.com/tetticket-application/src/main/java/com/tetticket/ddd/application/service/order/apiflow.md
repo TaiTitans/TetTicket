@@ -8,7 +8,7 @@ This API handles the creation and processing of orders using asynchronous proces
 ### 1. Order Creation (`POST /api/v1/orders`)
 - Validates user's cart is not empty
 - Creates initial order with PENDING status
-- Saves order to a database
+- Saves order to database
 - Sends order event to Kafka `order-events` topic
 - Returns order details immediately with 202 Accepted status
 
@@ -21,24 +21,36 @@ This API handles the creation and processing of orders using asynchronous proces
 
 ### 3. Payment Processing
 - Receives event from `payment-events` topic
-- Processes payment
+- Creates payment record with transaction ID
+- Processes payment with configurable success rate (80% success)
 - On SUCCESS:
-    - Creates payment record with SUCCESS status
-    - Updates order status to PROCESSING
-    - Sends event to `order-processing` topic
+  - Sets payment status to SUCCESS
+  - Records payment timestamp
+  - Updates order status to PENDING
+  - Sends event to `order-processing` topic
 - On CANCEL:
-    - Creates payment record with CANCEL status
-    - Updates order status to CANCEL
-    - Keeps cart items intact
-    - Logs payment failure
+  - Sets payment status to CANCEL
+  - Updates order status to CANCEL
+  - Keeps cart items intact
+  - Logs payment failure
 
 ### 4. Order Finalization
 - Receives event from `order-processing` topic
 - Updates order status to SUCCESS
 - Clears user's cart
+- Sends confirmation email to user
 - Completes the order process
 
 ## Status Flow
+
+```
+┌─── Payment Success ───► PROCESSING ───► SUCCESS PENDING ───────────┤ └─── Payment Cancel ───► CANCEL
+```
+
+## Payment Methods
+- BANKING
+- MOMO
+- VNPAY
 
 ## Error Handling
 - Payment failures result in CANCEL status
@@ -49,7 +61,11 @@ This API handles the creation and processing of orders using asynchronous proces
 
 ## Technical Details
 - Async processing using CompletableFuture
-- Kafka for event messaging
-- Each processing step simulates a 2-second delay
+- Kafka topics:
+  - `order-events`
+  - `payment-events`
+  - `order-processing`
+- 2-second processing simulation at each step
 - Transactional operations
 - Event-driven architecture
+- Email notifications for successful orders

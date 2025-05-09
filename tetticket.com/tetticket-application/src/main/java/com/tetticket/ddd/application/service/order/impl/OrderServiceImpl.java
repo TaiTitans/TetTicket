@@ -6,6 +6,7 @@ import com.tetticket.ddd.application.model.OrderEvent;
 import com.tetticket.ddd.application.model.cart.CartDTO;
 import com.tetticket.ddd.application.model.cart.CartItemDTO;
 import com.tetticket.ddd.application.service.cart.CartService;
+import com.tetticket.ddd.application.service.mail.EmailService;
 import com.tetticket.ddd.application.service.order.OrderService;
 import com.tetticket.ddd.domain.model.entity.*;
 import com.tetticket.ddd.domain.model.enums.PaymentMethod;
@@ -36,6 +37,7 @@ public class OrderServiceImpl implements OrderService {
     private final CartService cartService;
     private final PaymentRepository paymentRepository;
     private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
+    private final EmailService emailService;
 
     private static final String ORDER_TOPIC = "order-events";
     private static final String PAYMENT_TOPIC = "payment-events";
@@ -186,8 +188,14 @@ public class OrderServiceImpl implements OrderService {
     public void finalizeOrder(OrderEvent event) {
         try {
             Thread.sleep(2000); // Simulate processing
+            Order order = orderRepository.findById(event.getOrderId()).orElseThrow(()->new RuntimeException("Order not found"));
+
             updateOrderStatus(event.getOrderId(), Status.SUCCESS);
             cartService.clearCart(event.getUserId());
+
+            //Send email notification
+            emailService.generateOrderConfirmationTemplate(order);
+            log.info("Order finalized successfully for order ID: {}", event.getOrderId());
         } catch (Exception e) {
             handleProcessingError("Error finalizing order", e, event.getOrderId());
         }
