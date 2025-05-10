@@ -96,6 +96,12 @@ TetTicket/
 3. Choose ticket type, quantity, and proceed with payment.
 4. Check your email for the e-ticket.
 
+## Order Ticket
+![image](https://github.com/user-attachments/assets/55d55022-c39f-46ea-8124-5c668d0e60ca)
+
+
+
+
 ## ✨ Contribution
 
 If you'd like to contribute to the project:
